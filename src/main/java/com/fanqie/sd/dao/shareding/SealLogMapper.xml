@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanqie.sd.dao.shareding.SealLogMapper">
+    <resultMap id="BaseResultMap" type="com.fanqie.sd.entity.SealLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="es_id" property="esId" jdbcType="VARCHAR"/>
+        <result column="seal_id" property="sealId" jdbcType="BIGINT"/>
+        <result column="seal_name" property="sealName" jdbcType="VARCHAR"/>
+        <result column="owner_name" property="ownerName" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="seal_dept_id" property="sealDeptId" jdbcType="BIGINT"/>
+        <result column="seal_dept_name" property="sealDeptName" jdbcType="VARCHAR"/>
+        <result column="business_type" property="businessType" jdbcType="TINYINT"/>
+        <result column="action_time" property="actionTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, es_id, seal_id, seal_name, owner_name, user_id, user_name,
+        seal_dept_id, seal_dept_name, business_type, action_time
+    </sql>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from ps_seal_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.fanqie.sd.entity.SealLog">
+        insert into ps_seal_log (id, es_id, seal_id,
+                                 seal_name, owner_name, user_id,
+                                 user_name,seal_dept_id, seal_dept_name,
+                                 business_type,action_time)
+        values (#{id,jdbcType=BIGINT}, #{esId,jdbcType=VARCHAR}, #{sealId,jdbcType=BIGINT},
+                #{sealName,jdbcType=VARCHAR},#{ownerName,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
+                #{userName,jdbcType=VARCHAR},#{sealDeptId,jdbcType=BIGINT}, #{sealDeptName,jdbcType=VARCHAR},
+                #{businessType,jdbcType=TINYINT},#{actionTime,jdbcType=TIMESTAMP})
+    </insert>
+
+
+</mapper>
